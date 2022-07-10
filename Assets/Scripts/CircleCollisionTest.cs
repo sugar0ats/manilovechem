@@ -58,6 +58,11 @@ public class CircleCollisionTest : MonoBehaviour
         }
     }
 
+    public void resetElectrons()
+    {
+        this.electronCount = 0;
+    }
+
     //private void OnMouseUp()
     //{
     //    isClicked = false;

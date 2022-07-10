@@ -22,13 +22,14 @@ public class GameRunner : MonoBehaviour
     public Element currentElement;
 
     public TextMeshProUGUI elementDisplayText;
+    public TextMeshProUGUI checkDisplayText;
+    public GameObject chckDispTextObj;
 
     void Start()
     {
         initElements();
-        currentElement = elements[getRandInt(0, numElements - 1)];
-        elementDisplayText.text = currentElement.getSymbol(); // convert correct answer to string
-        correctAnswer = currentElement.getNum(); // placeholder
+        resetRound();
+        
     }
 
     // Update is called once per frame
@@ -77,7 +78,32 @@ public class GameRunner : MonoBehaviour
             count += (i == valenceOrbital - 1 ? electronArray[i] : maxElecArray[i]);
         }
         Debug.Log("count is " + count);
-        Debug.Log("is this bohr model in the ground state?: " + (count == correctAnswer && totalElectronCount == correctAnswer));
+
+        //chckDispTextObj.SetActive(true);
+        checkDisplayText.enabled = true;
+
+        if (count == correctAnswer && totalElectronCount == correctAnswer) { // what happens when you check the answer?
+            checkDisplayText.text = "correct!";
+
+            Invoke("resetRound", 2.0f);
+        } else
+        {
+            checkDisplayText.text = "incorrect";
+        };
+
+        Invoke("hideCheckDisplayText", 1.0f);
+    }
+
+    public void resetRound()
+    {
+        currentElement = elements[getRandInt(0, numElements - 1)];
+        elementDisplayText.text = currentElement.getSymbol(); // convert correct answer to string
+        correctAnswer = currentElement.getNum(); // placeholder
+
+        foreach (GameObject orbital in orbitals)
+        {
+            orbital.GetComponent<CircleCollisionTest>().resetElectrons();
+        }
     }
 
     private void initElements()
@@ -92,5 +118,10 @@ public class GameRunner : MonoBehaviour
     private int getRandInt(int start, int end)
     {
         return (int) (Random.Range(start, end));
+    }
+
+    public void hideCheckDisplayText()
+    {
+        checkDisplayText.enabled = false;
     }
 }
