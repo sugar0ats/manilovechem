@@ -613,6 +613,7 @@ GameObject:
   - component: {fileID: 341211967}
   - component: {fileID: 341211966}
   - component: {fileID: 341211965}
+  - component: {fileID: 341211968}
   m_Layer: 5
   m_Name: neutronNum
   m_TagString: Untagged
@@ -720,7 +721,19 @@ MonoBehaviour:
       m_Calls: []
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 341211968}
+        m_TargetAssemblyTypeName: NucleusBehavior, Assembly-CSharp
+        m_MethodName: updateNeutrons
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnTouchScreenKeyboardStatusChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -777,6 +790,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 341211963}
   m_CullTransparentMesh: 1
+--- !u!114 &341211968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 341211963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3ea9ff9f52b05646a9788c4bd7ec1d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  protonField: {fileID: 852300156}
+  protonInput: {fileID: 852300158}
+  neutronField: {fileID: 341211963}
+  neutronInput: {fileID: 341211965}
+  protonCount: 0
+  neutronCount: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1263,6 +1294,7 @@ GameObject:
   - component: {fileID: 852300160}
   - component: {fileID: 852300159}
   - component: {fileID: 852300158}
+  - component: {fileID: 852300161}
   m_Layer: 5
   m_Name: protonNum
   m_TagString: Untagged
@@ -1370,7 +1402,19 @@ MonoBehaviour:
       m_Calls: []
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 852300161}
+        m_TargetAssemblyTypeName: NucleusBehavior, Assembly-CSharp
+        m_MethodName: updateProtons
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnTouchScreenKeyboardStatusChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1427,6 +1471,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 852300156}
   m_CullTransparentMesh: 1
+--- !u!114 &852300161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 852300156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3ea9ff9f52b05646a9788c4bd7ec1d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  protonField: {fileID: 852300156}
+  protonInput: {fileID: 852300158}
+  neutronField: {fileID: 341211963}
+  neutronInput: {fileID: 341211965}
+  protonCount: 0
+  neutronCount: 0
 --- !u!1 &881160203
 GameObject:
   m_ObjectHideFlags: 0
