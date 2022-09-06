@@ -21,7 +21,7 @@ public class ClickControls : MonoBehaviour
             mousePos = Input.mousePosition;
             mousePos = Camera.main.ScreenToWorldPoint(mousePos); // convert screen point of mouse to in game point
 
-            this.gameObject.transform.localPosition = new Vector3(mousePos.x - startPosX, mousePos.y - startPosY, 0);
+            this.gameObject.transform.localPosition = new Vector3(mousePos.x - startPosX, mousePos.y - startPosY, 30);
             //Debug.Log("this obj is being clicked");
 
             //this.gameObject.GetComponent<SpriteRenderer>().color = Color.red;

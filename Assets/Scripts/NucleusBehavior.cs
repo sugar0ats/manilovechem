@@ -31,7 +31,7 @@ public class NucleusBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log("");
     }
 
     public void updateProtons()

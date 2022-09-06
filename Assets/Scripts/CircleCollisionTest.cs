@@ -36,7 +36,7 @@ public class CircleCollisionTest : MonoBehaviour
             float radians = ((float) i / electronCount) * 2 * (float)System.Math.PI;
             GameObject piece = Instantiate(electron);
             electrons[i] = piece;
-            piece.transform.position = this.transform.position + radius * new Vector3((float)System.Math.Cos(radians), (float)System.Math.Sin(radians));
+            piece.transform.position = this.transform.position + radius * new Vector3((float)System.Math.Cos(radians), (float)System.Math.Sin(radians), 30);
             //Debug.Log("radians are " + (i / maxElectronCount) + "* 2pi");
         }
 
