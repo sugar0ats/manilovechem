@@ -22,8 +22,6 @@ public class NucleusBehavior : MonoBehaviour
         
         updateProtons();
         updateNeutrons();
-        // protonInput = protonField.GetComponent<TMP_InputField>();
-        // neutronInput = neutronField.GetComponent<TMP_InputField>();
         protonInput.text = "0";
         neutronInput.text = "0";
     }
@@ -31,7 +29,8 @@ public class NucleusBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("");
+        updateProtons();
+        updateNeutrons();
     }
 
     public void updateProtons()
@@ -45,6 +44,26 @@ public class NucleusBehavior : MonoBehaviour
     {
 
         neutronCount = (neutronInput.text != "" ? Int16.Parse(neutronInput.text) : 0);
+    }
+
+    public int getProtons()
+    {
+        return protonCount;
+    }
+
+    public int getNeutrons()
+    {
+        return neutronCount;
+    }
+
+    public void resetProtons()
+    {
+        protonInput.text = "0";
+    }
+
+    public void resetNeutrons()
+    {
+        neutronInput.text = "0";
     }
 
     public void repZeroPro() {

@@ -11,6 +11,8 @@ public class GameRunner : MonoBehaviour
     public int[] maxElecArray = { 2, 8, 8 };
     public int totalElectronCount = 0;
     public int correctAnswer;
+    public int correctProtons;
+    public int correctNeutrons;
 
     public  int numElements = 18; // must be static to be used below
     public Element[] elements = new Element[18];
@@ -22,11 +24,19 @@ public class GameRunner : MonoBehaviour
     public Element currentElement;
 
     public TextMeshProUGUI elementDisplayText;
+    public TextMeshProUGUI massDisplayText;
+    public TextMeshProUGUI chargeDisplayText;
     public TextMeshProUGUI checkDisplayText;
     public GameObject chckDispTextObj;
 
+    public GameObject nucleus;
+    public int protonCount;
+    public int neutronCount;
+
     void Start()
     {
+        updateNucleus();
+
         initElements();
         resetRound();
         
@@ -35,6 +45,8 @@ public class GameRunner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        updateNucleus();
+
         totalElectronCount = 0; // reset electron count, or else it just keeps adding throughout all the frames :(
 
         for (int i = 0; i < orbitals.Length; i++) // for each loop in the orbitals
@@ -51,6 +63,18 @@ public class GameRunner : MonoBehaviour
         }
 
         //Debug.Log("total electron count is " + totalElectronCount);
+    }
+
+    public void updateNucleus()
+    {
+        protonCount = nucleus.GetComponent<NucleusBehavior>().getProtons();
+        neutronCount = nucleus.GetComponent<NucleusBehavior>().getNeutrons();
+    }
+
+    public void resetNucleus()
+    {
+        nucleus.GetComponent<NucleusBehavior>().resetProtons();
+        nucleus.GetComponent<NucleusBehavior>().resetNeutrons();
     }
 
     public void isCorrect() // for now, we are asking for ground states ONLY
@@ -82,28 +106,45 @@ public class GameRunner : MonoBehaviour
         //chckDispTextObj.SetActive(true);
         checkDisplayText.enabled = true;
 
-        if (count == correctAnswer && totalElectronCount == correctAnswer) { // what happens when you check the answer?
+        if (count == correctAnswer && totalElectronCount == correctAnswer && isProtCorrect() && isNeutCorrect()) { // what happens when you check the answer?
             checkDisplayText.text = "correct!";
 
-            Invoke("resetRound", 2.0f);
+            Invoke("resetRound", 1.0f);
         } else
         {
             checkDisplayText.text = "incorrect";
         };
 
-        Invoke("hideCheckDisplayText", 1.0f);
+        Invoke("hideCheckDisplayText", 0.5f);
+    }
+
+    public bool isProtCorrect()
+    {
+        return protonCount == correctProtons;
+    }
+
+    public bool isNeutCorrect()
+    {
+        return neutronCount == correctNeutrons;
     }
 
     public void resetRound()
     {
         currentElement = elements[getRandInt(0, numElements - 1)];
+        Isotope isotope = new Isotope(currentElement);
         elementDisplayText.text = currentElement.getSymbol(); // convert correct answer to string
-        correctAnswer = currentElement.getNum(); // placeholder
+        massDisplayText.text = "" + isotope.getMass();
+        chargeDisplayText.text = "" + isotope.getCharge();
+        correctAnswer = isotope.getElectrons(); // placeholder
+        correctProtons = isotope.getProtons();
+        correctNeutrons = isotope.getNeutrons();
 
         foreach (GameObject orbital in orbitals)
         {
             orbital.GetComponent<CircleCollisionTest>().resetElectrons();
         }
+
+        
     }
 
     private void initElements()

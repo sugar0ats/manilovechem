@@ -10,6 +10,7 @@ public class CircleCollisionTest : MonoBehaviour
     //private bool isClicked = false;
     public float minCollideRadius = 1.9f;
     public GameObject electron;
+    public GameObject fullElectron;
     public int maxElectronCount = 4;
     private GameObject[] electrons;
     public int electronCount = 0;
@@ -34,7 +35,7 @@ public class CircleCollisionTest : MonoBehaviour
         for (int i = 0; i < electronCount; i++)
         {
             float radians = ((float) i / electronCount) * 2 * (float)System.Math.PI;
-            GameObject piece = Instantiate(electron);
+            GameObject piece = (electronCount == maxElectronCount ? Instantiate(fullElectron) : Instantiate(electron));
             electrons[i] = piece;
             piece.transform.position = this.transform.position + radius * new Vector3((float)System.Math.Cos(radians), (float)System.Math.Sin(radians), 30);
             //Debug.Log("radians are " + (i / maxElectronCount) + "* 2pi");
@@ -43,7 +44,7 @@ public class CircleCollisionTest : MonoBehaviour
         
     }
 
-    private void OnMouseDown()
+    private void OnMouseOver()
     {
         Debug.Log("click registered # " + name);
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -55,6 +56,10 @@ public class CircleCollisionTest : MonoBehaviour
         {
             Debug.Log("click on orbital " + name + "!");
             electronCount = (electronCount == maxElectronCount ? 0 : electronCount + 1);
+        } 
+        if (Input.GetMouseButtonDown(1) && distance >= System.Math.Pow(minCollideRadius, 2))
+        {
+            electronCount = (electronCount == 0 ? maxElectronCount : electronCount - 1);
         }
     }
 
